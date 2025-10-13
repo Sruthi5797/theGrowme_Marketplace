@@ -5,7 +5,7 @@ export function Header() {
     <header className="border-b border-border bg-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 py-4">
         <div className="flex items-center">
-          <Link href="/" className="text-2xl font-bold hover:text-primary/80 transition-colors text-accent-foreground">
+          <Link href="/" className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
             theGrowMe
           </Link>
         </div>

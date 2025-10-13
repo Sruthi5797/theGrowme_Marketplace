@@ -96,7 +96,7 @@ export function CollaborationCard({
         <div className="flex items-center justify-between mb-4">
           <div>
             <p className="text-sm text-muted-foreground">Package Price</p>
-            <p className="font-bold text-lg text-primary">{price}</p>
+            <p className="font-bold text-sidebar-primary text-xl">{price}</p>
           </div>
           {duration && (
             <div className="text-right">

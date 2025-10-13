@@ -4,17 +4,17 @@ import Image from "next/image"
 import Link from "next/link"
 
 const categories = [
-  { name: "All Services", slug: "", image: "/spa-treatment-with-stones.jpg" },
+  { name: "All Services", slug: "", image: "/wellness.jpg" },
   { name: "Massage", slug: "massage", image: "/massage-therapy-hands.jpg" },
   { name: "Hair Styling", slug: "hair", image: "/hairstylist-cutting-hair.jpg" },
   { name: "Fitness", slug: "fitness", image: "/person-lifting-weights-training.jpg" },
-  { name: "Yoga", slug: "yoga", image: "/spa-treatment-with-stones.jpg" },
+  { name: "Yoga", slug: "yoga", image: "/yoga-women.jpg" },
   { name: "Spa", slug: "spa", image: "/spa-treatment-with-stones.jpg" },
   { name: "Makeup", slug: "makeup", image: "/makeup-artist-applying-makeup.jpg" },
-  { name: "Skincare", slug: "skincare", image: "/makeup-artist-applying-makeup.jpg" },
   { name: "Nails", slug: "nails", image: "/nail-care-manicure.jpg" },
-  { name: "Pilates", slug: "pilates", image: "/person-lifting-weights-training.jpg" },
-  { name: "Nutrition", slug: "nutrition", image: "/spa-treatment-with-stones.jpg" },
+  { name: "Pilates", slug: "pilates", image: "/woman-doing-pilates-with-ball.jpg" },
+  { name: "Nutrition", slug: "nutrition", image: "/prepared-healthy-meal-in-container.jpg" },
+  { name: "More", slug: "more", image: "" },
 ]
 
 export function CategoriesScroll() {
