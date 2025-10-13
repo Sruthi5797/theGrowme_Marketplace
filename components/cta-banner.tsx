@@ -1,6 +1,6 @@
 export function CTABanner() {
   return (
-    <div className="bg-gradient-to-r from-primary via-pink-400 to-rose-400 text-white">
+    <div className="bg-gradient-to-r from-primary via-pink-400 to-rose-400 text-white border-sidebar-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 text-white bg-accent">
         <div className="flex flex-col items-center justify-center text-center gap-6">
           <div>
