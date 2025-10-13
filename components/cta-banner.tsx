@@ -1,19 +1,23 @@
-export function CTABanner() {
+export function HeroCTASection() {
   return (
-    <div className="bg-gradient-to-r from-primary via-pink-400 to-rose-400 text-white border-sidebar-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 text-white bg-accent">
-        <div className="flex flex-col items-center justify-center text-center gap-6">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-card-foreground">Connect with 10,000+ Wellness &amp; Beauty Experts Near You</h2>
-            <p className="max-w-2xl mx-auto text-zinc-800 leading-3 text-lg">
-              Book self-care services that truly fit your style and needs today
-            </p>
-          </div>
-          <button className="hover:bg-white/90 px-10 py-4 rounded-lg font-semibold text-lg transition-all hover:scale-105 shadow-lg bg-chart-5 text-background leading-4">
-            Start here
+    <section className="
+relative bg-gradient-to-br from-primary/10 via-emerald-50 to-green-50 py-20 px-6 lg:px-20 -mx-6 lg:-mx-20 mb-16">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-balance">
+          Connect with <span className="text-primary">10,000+</span> Wellness & Beauty Experts
+        </h1>
+        <p className="text-xl text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto">
+          Book self-care services that truly fit your style and needs — all in one place.
+        </p>
+        <div className="flex flex-col items-center gap-3">
+          <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-lg">
+            Start Your Journey
           </button>
+          <p className="text-sm text-muted-foreground">
+            Free to explore • No commitments • Fully private
+          </p>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
