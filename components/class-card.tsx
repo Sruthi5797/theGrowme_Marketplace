@@ -36,7 +36,7 @@ export function ClassCard({ image, title, instructor, date, duration, price }: C
           <span>{duration}</span>
         </div>
         <div className="flex items-center justify-between mb-3">
-          <p className="text-base font-semibold text-primary">{price}</p>
+          <p className="text-base font-semibold text-sidebar-primary">{price}</p>
         </div>
 
         <div className="flex gap-2">
