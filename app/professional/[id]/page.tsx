@@ -1,10 +1,10 @@
 "use client"
 
+import { use, useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { GamificationWidget } from "@/components/gamification-widget"
-import { Leaf, MapPin, Clock, CheckCircle, Calendar, ChevronLeft, ChevronRight } from "lucide-react"
+import { Leaf, MapPin, Clock, CheckCircle, Calendar, ChevronLeft, ChevronRight, Award, TrendingUp, Star, Users } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
 const professionalsData: Record<string, any> = {
@@ -13,6 +13,9 @@ const professionalsData: Record<string, any> = {
     title: "Licensed Massage Therapist",
     rating: 5.0,
     reviews: 127,
+    yearsExperience: 10,
+    totalBookings: 1247,
+    weeklyBookings: 18,
     location: "Downtown, New York",
     responseTime: "Within 1 hour",
     images: ["/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"],
@@ -41,6 +44,9 @@ const professionalsData: Record<string, any> = {
     title: "Luxury Spa Specialist",
     rating: 4.95,
     reviews: 98,
+    yearsExperience: 15,
+    totalBookings: 2134,
+    weeklyBookings: 12,
     location: "Upper East Side, New York",
     responseTime: "Within 2 hours",
     images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
@@ -69,6 +75,9 @@ const professionalsData: Record<string, any> = {
     title: "Certified Personal Trainer",
     rating: 4.98,
     reviews: 156,
+    yearsExperience: 8,
+    totalBookings: 1876,
+    weeklyBookings: 24,
     location: "Chelsea, New York",
     responseTime: "Within 30 minutes",
     images: [
@@ -101,6 +110,9 @@ const professionalsData: Record<string, any> = {
     title: "Professional Makeup Artist",
     rating: 4.97,
     reviews: 143,
+    yearsExperience: 12,
+    totalBookings: 1653,
+    weeklyBookings: 15,
     location: "Manhattan, New York",
     responseTime: "Within 1 hour",
     images: [
@@ -133,6 +145,9 @@ const professionalsData: Record<string, any> = {
     title: "Master Hair Stylist",
     rating: 5.0,
     reviews: 189,
+    yearsExperience: 14,
+    totalBookings: 2456,
+    weeklyBookings: 22,
     location: "Brooklyn, New York",
     responseTime: "Within 1 hour",
     images: ["/hairstylist-cutting-hair.jpg", "/hairstylist-cutting-hair.jpg", "/hairstylist-cutting-hair.jpg"],
@@ -161,6 +176,9 @@ const professionalsData: Record<string, any> = {
     title: "Nail Artist & Technician",
     rating: 4.92,
     reviews: 112,
+    yearsExperience: 7,
+    totalBookings: 1289,
+    weeklyBookings: 20,
     location: "SoHo, New York",
     responseTime: "Within 2 hours",
     images: ["/nail-care-manicure.jpg", "/nail-care-manicure.jpg", "/nail-care-manicure.jpg"],
@@ -189,16 +207,71 @@ const professionalsData: Record<string, any> = {
     title: "Yoga & Meditation Instructor",
     rating: 4.99,
     reviews: 134,
+    yearsExperience: 9,
+    totalBookings: 1543,
+    weeklyBookings: 16,
     location: "Brooklyn, New York",
     responseTime: "Within 1 hour",
     images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
     about:
       "RYT-500 certified yoga instructor with 9 years of teaching experience. I offer personalized yoga and meditation sessions for all levels, focusing on mindfulness and holistic wellness.",
     services: [
-      { name: "Private Yoga Session", duration: "60 min", price: "$70" },
-      { name: "Meditation & Breathwork", duration: "45 min", price: "$55" },
-      { name: "Restorative Yoga", duration: "75 min", price: "$80" },
-      { name: "Couples Yoga", duration: "90 min", price: "$120" },
+      { 
+        name: "Private Yoga Session", 
+        duration: "60 min", 
+        price: "$70",
+        description: "One-on-one personalized yoga practice tailored to your goals and fitness level",
+        procedure: [
+          "Initial consultation to understand your goals and physical condition",
+          "Warm-up with gentle stretches and breathing exercises (10 min)",
+          "Customized asana practice focusing on alignment and form (35 min)",
+          "Cool-down with restorative poses and deep stretches (10 min)",
+          "Final relaxation in Savasana with guided meditation (5 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Meditation & Breathwork", 
+        duration: "45 min", 
+        price: "$55",
+        description: "Learn powerful breathing techniques and meditation practices for stress relief and mental clarity",
+        procedure: [
+          "Comfortable seated position setup with props if needed",
+          "Introduction to pranayama (breathing) techniques (10 min)",
+          "Guided breathwork practice - alternate nostril, ujjayi breathing (15 min)",
+          "Mindfulness meditation with body scan technique (15 min)",
+          "Integration and reflection time (5 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Restorative Yoga", 
+        duration: "75 min", 
+        price: "$80",
+        description: "Gentle, deeply relaxing practice using props to support your body in restful poses",
+        procedure: [
+          "Welcome and intention setting for the practice",
+          "Gentle breathing exercises to calm the nervous system (10 min)",
+          "Supported restorative poses with bolsters and blankets (50 min)",
+          "Each pose held for 5-10 minutes for deep release",
+          "Final relaxation with yoga nidra (yogic sleep) (15 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Couples Yoga", 
+        duration: "90 min", 
+        price: "$120",
+        description: "Partner yoga session to deepen connection, trust, and communication through shared practice",
+        procedure: [
+          "Partner breathing and synchronization exercises (10 min)",
+          "Warm-up with individual and partner stretches (15 min)",
+          "Partner-assisted poses focusing on trust and balance (40 min)",
+          "Communication and connection-building exercises (15 min)",
+          "Couples meditation and relaxation practice (10 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
     ],
     thingsToKnow: [
       "Yoga mat and props provided",
@@ -217,6 +290,9 @@ const professionalsData: Record<string, any> = {
     title: "Licensed Physiotherapist",
     rating: 4.96,
     reviews: 167,
+    yearsExperience: 11,
+    totalBookings: 1934,
+    weeklyBookings: 19,
     location: "Manhattan, New York",
     responseTime: "Within 30 minutes",
     images: ["/massage-therapy-hands.jpg", "/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg"],
@@ -245,6 +321,9 @@ const professionalsData: Record<string, any> = {
     title: "Certified Nutrition Coach",
     rating: 4.94,
     reviews: 89,
+    yearsExperience: 7,
+    totalBookings: 1067,
+    weeklyBookings: 14,
     location: "Queens, New York",
     responseTime: "Within 2 hours",
     images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
@@ -273,6 +352,9 @@ const professionalsData: Record<string, any> = {
     title: "Licensed Esthetician",
     rating: 4.98,
     reviews: 121,
+    yearsExperience: 10,
+    totalBookings: 1432,
+    weeklyBookings: 17,
     location: "Upper West Side, New York",
     responseTime: "Within 1 hour",
     images: [
@@ -305,6 +387,9 @@ const professionalsData: Record<string, any> = {
     title: "Eyebrow Specialist",
     rating: 4.93,
     reviews: 95,
+    yearsExperience: 6,
+    totalBookings: 1156,
+    weeklyBookings: 13,
     location: "Tribeca, New York",
     responseTime: "Within 2 hours",
     images: [
@@ -337,6 +422,9 @@ const professionalsData: Record<string, any> = {
     title: "Lash Extension Specialist",
     rating: 4.96,
     reviews: 108,
+    yearsExperience: 6,
+    totalBookings: 1298,
+    weeklyBookings: 21,
     location: "East Village, New York",
     responseTime: "Within 1 hour",
     images: [
@@ -366,13 +454,31 @@ const professionalsData: Record<string, any> = {
   },
 }
 
-export default function ProfessionalProfile({ params }: { params: { id: string } }) {
+export default function ProfessionalProfile({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [selectedService, setSelectedService] = useState<any>(null)
   const [currentMonth, setCurrentMonth] = useState(new Date())
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const professional = professionalsData[params.id] || professionalsData["sarah-massage"]
+  const professional = professionalsData[id] || professionalsData["sarah-massage"]
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % professional.images.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [professional.images.length])
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % professional.images.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + professional.images.length) % professional.images.length)
+  }
 
   const generateCalendar = () => {
     const year = currentMonth.getFullYear()
@@ -411,160 +517,261 @@ export default function ProfessionalProfile({ params }: { params: { id: string }
     <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="max-w-7xl mx-auto px-6 lg:px-20 py-12">
-        <div className="mb-8 pb-8 border-b border-border">
+      <main className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+        {/* Minimalistic Hero Section */}
+        <div className="mb-10">
           <h1 className="text-4xl font-bold mb-2">{professional.name}</h1>
-          <p className="text-xl text-muted-foreground mb-4">{professional.title}</p>
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-1">
-              <Leaf className="w-4 h-4 fill-current text-primary" />
-              <span className="font-semibold">{professional.rating}</span>
-              <span className="text-muted-foreground">({professional.reviews} reviews)</span>
+          <p className="text-xl text-muted-foreground mb-6">{professional.title}</p>
+          
+          {/* Compact Stats Row */}
+          <div className="flex flex-wrap gap-6 mb-6">
+            <div className="flex items-center gap-2">
+              <Award className="w-5 h-5 text-primary" />
+              <div>
+                <span className="text-2xl font-bold text-primary">{professional.yearsExperience}</span>
+                <span className="text-sm text-muted-foreground ml-1">years</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1 text-muted-foreground">
+            
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-green-600" />
+              <div>
+                <span className="text-2xl font-bold text-green-600">{professional.totalBookings.toLocaleString()}</span>
+                <span className="text-sm text-muted-foreground ml-1">bookings</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-blue-600" />
+              <div>
+                <span className="text-2xl font-bold text-blue-600">{professional.weeklyBookings}</span>
+                <span className="text-sm text-muted-foreground ml-1">this week</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+              <div>
+                <span className="text-2xl font-bold text-amber-500">{professional.rating}</span>
+                <span className="text-sm text-muted-foreground ml-1">({professional.reviews} reviews)</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Location and Response */}
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               <span>{professional.location}</span>
             </div>
-            <div className="flex items-center gap-1 text-muted-foreground">
+            <div className="flex items-center gap-2">
               <Clock className="w-4 h-4" />
               <span>Responds {professional.responseTime}</span>
             </div>
           </div>
         </div>
 
-        {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-12 rounded-xl overflow-hidden">
-          <div className="relative aspect-[4/3]">
-            <Image
-              src={professional.images[0] || "/placeholder.svg"}
-              alt="Professional work"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="grid grid-rows-2 gap-4">
-            <div className="relative aspect-[2/1]">
-              <Image
-                src={professional.images[1] || "/placeholder.svg"}
-                alt="Professional work"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="relative aspect-[2/1]">
-              <Image
-                src={professional.images[2] || "/placeholder.svg"}
-                alt="Professional work"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
+        {/* Two Column Layout */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Left Column - Main Content */}
+          <div className="lg:col-span-2 space-y-8">
             {/* About */}
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">About</h2>
+            <section className="bg-card border border-border rounded-lg p-6">
+              <h2 className="text-2xl font-semibold mb-3">About</h2>
               <p className="text-muted-foreground leading-relaxed">{professional.about}</p>
             </section>
 
-            {/* Services Offered */}
+            {/* Services */}
             <section>
-              <h2 className="text-2xl font-semibold mb-6">Services Offered</h2>
+              <h2 className="text-2xl font-semibold mb-4">Services</h2>
               <div className="space-y-4">
                 {professional.services.map((service: any, index: number) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-4 border border-border rounded-lg hover:border-primary transition-colors"
-                  >
-                    <div>
-                      <h3 className="font-semibold mb-1">{service.name}</h3>
-                      <p className="text-sm text-muted-foreground">{service.duration}</p>
-                    </div>
-                    <p className="text-lg font-semibold">{service.price}</p>
+                  <div key={index} className="bg-card border border-border rounded-lg overflow-hidden">
+                    <button
+                      onClick={() => setSelectedService(selectedService?.name === service.name ? null : service)}
+                      className="w-full p-5 text-left hover:bg-muted/50 transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold mb-1">{service.name}</h3>
+                          {service.description && (
+                            <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
+                          )}
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Clock className="w-4 h-4" />
+                            <span>{service.duration}</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-primary">{service.price}</p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {selectedService?.name === service.name ? "Hide details" : "View details"}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                    
+                    {/* Expandable Service Details */}
+                    {selectedService?.name === service.name && service.procedure && (
+                      <div className="border-t border-border p-5 bg-muted/30">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5 text-primary" />
+                          What to Expect
+                        </h4>
+                        <ol className="space-y-2 mb-4">
+                          {service.procedure.map((step: string, idx: number) => (
+                            <li key={idx} className="flex gap-3 text-sm text-muted-foreground">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-semibold">
+                                {idx + 1}
+                              </span>
+                              <span className="pt-0.5">{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                        
+                        {service.images && service.images.length > 0 && (
+                          <div className="grid grid-cols-2 gap-3 mt-4">
+                            {service.images.map((img: string, imgIdx: number) => (
+                              <div key={imgIdx} className="relative aspect-video rounded-lg overflow-hidden">
+                                <Image
+                                  src={img}
+                                  alt={`${service.name} ${imgIdx + 1}`}
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
             </section>
 
             {/* Things to Know */}
-            <section>
-              <h2 className="text-2xl font-semibold mb-6">Things to Know</h2>
-              <div className="space-y-3">
+            <section className="bg-card border border-border rounded-lg p-6">
+              <h2 className="text-2xl font-semibold mb-4">Things to Know</h2>
+              <div className="space-y-2">
                 {professional.thingsToKnow.map((item: string, index: number) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <p className="text-muted-foreground">{item}</p>
+                  <div key={index} className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-muted-foreground">{item}</p>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* Location */}
-            <section>
-              <h2 className="text-2xl font-semibold mb-4">Location</h2>
-              <div className="flex items-center gap-2 text-muted-foreground mb-4">
-                <MapPin className="w-5 h-5 text-primary" />
+            <section className="bg-card border border-border rounded-lg p-6">
+              <h2 className="text-2xl font-semibold mb-3">Location</h2>
+              <div className="flex items-center gap-2 text-muted-foreground mb-3">
+                <MapPin className="w-4 h-4 text-primary" />
                 <span>{professional.location}</span>
               </div>
-              <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
-                <p className="text-muted-foreground">Map placeholder</p>
+              <div className="w-full h-48 bg-muted rounded-lg flex items-center justify-center">
+                <p className="text-sm text-muted-foreground">Map placeholder</p>
               </div>
             </section>
           </div>
 
-          {/* Booking Sidebar */}
+          {/* Right Column - Booking Card & Image */}
           <div className="lg:col-span-1 space-y-6">
+            {/* Main Image */}
+            <div className="relative rounded-xl overflow-hidden shadow-lg">
+              <div className="relative aspect-[3/4]">
+                <Image
+                  src={professional.images[currentImageIndex] || "/placeholder.svg"}
+                  alt={`${professional.name}`}
+                  fill
+                  className="object-cover"
+                />
+                
+                {/* Simple Navigation */}
+                {professional.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all"
+                      aria-label="Previous"
+                    >
+                      <ChevronLeft className="w-4 h-4 text-gray-800" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all"
+                      aria-label="Next"
+                    >
+                      <ChevronRight className="w-4 h-4 text-gray-800" />
+                    </button>
+                    
+                    {/* Dots */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {professional.images.map((_: any, index: number) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`h-1.5 rounded-full transition-all ${
+                            index === currentImageIndex ? "bg-white w-6" : "bg-white/50 w-1.5"
+                          }`}
+                          aria-label={`Image ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
             <GamificationWidget />
 
-            <div className="sticky top-24 border border-border rounded-xl p-6 shadow-lg bg-card">
-              <h3 className="text-xl font-semibold mb-6">Book Your Session</h3>
+            {/* Booking Card */}
+            <div className="sticky top-6 bg-card border border-border rounded-xl p-5 shadow-lg">
+              <h3 className="text-lg font-semibold mb-4">Book a Session</h3>
 
               {/* Service Selection */}
-              <div className="mb-6">
-                <label className="text-sm font-semibold mb-3 block">Select Service</label>
+              <div className="mb-4">
+                <label className="text-sm font-medium mb-2 block">Select Service</label>
                 <div className="space-y-2">
                   {professional.services.map((service: any, index: number) => (
                     <button
                       key={index}
                       onClick={() => setSelectedService(service)}
-                      className={`w-full p-3 border rounded-lg text-left transition-colors ${
+                      className={`w-full p-3 border rounded-lg text-left transition-all text-sm ${
                         selectedService?.name === service.name
                           ? "border-primary bg-primary/5"
                           : "border-border hover:border-primary/50"
                       }`}
                     >
-                      <div className="flex justify-between items-start">
+                      <div className="flex justify-between items-center">
                         <div>
-                          <p className="font-semibold text-sm">{service.name}</p>
+                          <p className="font-medium">{service.name}</p>
                           <p className="text-xs text-muted-foreground">{service.duration}</p>
                         </div>
-                        <p className="font-semibold text-sm">{service.price}</p>
+                        <p className="font-semibold text-primary">{service.price}</p>
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Calendar Interface */}
+              {/* Calendar */}
               {selectedService && (
-                <div className="mb-6">
-                  <label className="text-sm font-semibold mb-3 flex items-center justify-between">
+                <div className="mb-4">
+                  <label className="text-sm font-medium mb-2 flex items-center justify-between">
                     <span className="flex items-center gap-2">
                       <Calendar className="w-4 h-4 text-primary" />
                       Select Date
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <button
                         onClick={() =>
                           setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))
                         }
                         className="p-1 hover:bg-muted rounded"
                       >
-                        <ChevronLeft className="w-4 h-4" />
+                        <ChevronLeft className="w-3 h-3" />
                       </button>
                       <span className="text-xs">
                         {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
@@ -575,15 +782,15 @@ export default function ProfessionalProfile({ params }: { params: { id: string }
                         }
                         className="p-1 hover:bg-muted rounded"
                       >
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="w-3 h-3" />
                       </button>
                     </div>
                   </label>
 
-                  <div className="border border-border rounded-lg p-3">
-                    <div className="grid grid-cols-7 gap-1 mb-2">
+                  <div className="border border-border rounded-lg p-2">
+                    <div className="grid grid-cols-7 gap-1 mb-1">
                       {["S", "M", "T", "W", "T", "F", "S"].map((day, i) => (
-                        <div key={i} className="text-center text-xs font-semibold text-muted-foreground">
+                        <div key={i} className="text-center text-xs font-medium text-muted-foreground">
                           {day}
                         </div>
                       ))}
@@ -612,8 +819,8 @@ export default function ProfessionalProfile({ params }: { params: { id: string }
 
               {/* Time Selection */}
               {selectedDate && selectedService && (
-                <div className="mb-6">
-                  <label className="text-sm font-semibold mb-3 block">Select Time</label>
+                <div className="mb-4">
+                  <label className="text-sm font-medium mb-2 block">Select Time</label>
                   <div className="grid grid-cols-2 gap-2">
                     {professional.availability
                       .find((day: any) => day.date === selectedDate)
@@ -621,7 +828,7 @@ export default function ProfessionalProfile({ params }: { params: { id: string }
                         <button
                           key={index}
                           onClick={() => setSelectedTime(slot)}
-                          className={`p-2 border rounded-lg text-sm transition-colors ${
+                          className={`p-2 border rounded text-xs transition-colors ${
                             selectedTime === slot
                               ? "border-primary bg-primary text-primary-foreground"
                               : "border-border hover:border-primary/50"
@@ -635,14 +842,14 @@ export default function ProfessionalProfile({ params }: { params: { id: string }
               )}
 
               <Button
-                className="w-full bg-primary hover:bg-primary/90"
+                className="w-full"
                 size="lg"
                 disabled={!selectedService || !selectedDate || !selectedTime}
               >
                 Book Now
               </Button>
 
-              <p className="text-xs text-center text-muted-foreground mt-4">You won't be charged yet</p>
+              <p className="text-xs text-center text-muted-foreground mt-3">You won't be charged yet</p>
             </div>
           </div>
         </div>
