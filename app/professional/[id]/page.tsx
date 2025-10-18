@@ -3,205 +3,11 @@
 import { use, useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { GamificationWidget } from "@/components/gamification-widget"
-import { Leaf, MapPin, Clock, CheckCircle, Calendar, ChevronLeft, ChevronRight, Award, TrendingUp, Star, Users } from "lucide-react"
+import { Leaf, MapPin, Clock, CheckCircle, Calendar, ChevronLeft, ChevronRight, Award, TrendingUp, Users } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 const professionalsData: Record<string, any> = {
-  "sarah-massage": {
-    name: "Sarah Johnson",
-    title: "Licensed Massage Therapist",
-    rating: 5.0,
-    reviews: 127,
-    yearsExperience: 10,
-    totalBookings: 1247,
-    weeklyBookings: 18,
-    location: "Downtown, New York",
-    responseTime: "Within 1 hour",
-    images: ["/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"],
-    about:
-      "I'm a licensed massage therapist with over 10 years of experience specializing in deep tissue, Swedish, and sports massage. My goal is to help you relax, recover, and feel your best.",
-    services: [
-      { name: "Deep Tissue Massage", duration: "60 min", price: "$85" },
-      { name: "Swedish Massage", duration: "60 min", price: "$75" },
-      { name: "Sports Massage", duration: "90 min", price: "$120" },
-      { name: "Hot Stone Therapy", duration: "75 min", price: "$95" },
-    ],
-    thingsToKnow: [
-      "Please arrive 10 minutes early for your appointment",
-      "Cancellations must be made 24 hours in advance",
-      "Gratuity is appreciated but not required",
-      "All equipment and linens are sanitized between sessions",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "1:00 PM", "3:00 PM"] },
-      { date: "Dec 22", slots: ["9:00 AM", "12:00 PM", "2:00 PM", "5:00 PM"] },
-    ],
-  },
-  "lisa-spa": {
-    name: "Lisa Anderson",
-    title: "Luxury Spa Specialist",
-    rating: 4.95,
-    reviews: 98,
-    yearsExperience: 15,
-    totalBookings: 2134,
-    weeklyBookings: 12,
-    location: "Upper East Side, New York",
-    responseTime: "Within 2 hours",
-    images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
-    about:
-      "With 15 years in luxury spa treatments, I create personalized wellness experiences that rejuvenate body and mind. Specializing in aromatherapy, hot stone therapy, and holistic healing.",
-    services: [
-      { name: "Luxury Spa Package", duration: "120 min", price: "$150" },
-      { name: "Aromatherapy Session", duration: "90 min", price: "$130" },
-      { name: "Hot Stone Therapy", duration: "75 min", price: "$110" },
-      { name: "Body Scrub & Wrap", duration: "60 min", price: "$95" },
-    ],
-    thingsToKnow: [
-      "Arrive 15 minutes early to enjoy our relaxation lounge",
-      "Robes and slippers provided",
-      "48-hour cancellation policy",
-      "Complimentary herbal tea included",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["10:00 AM", "1:00 PM", "4:00 PM"] },
-      { date: "Dec 21", slots: ["9:00 AM", "12:00 PM", "3:00 PM", "5:00 PM"] },
-      { date: "Dec 22", slots: ["11:00 AM", "2:00 PM"] },
-    ],
-  },
-  "david-training": {
-    name: "David Martinez",
-    title: "Certified Personal Trainer",
-    rating: 4.98,
-    reviews: 156,
-    yearsExperience: 8,
-    totalBookings: 1876,
-    weeklyBookings: 24,
-    location: "Chelsea, New York",
-    responseTime: "Within 30 minutes",
-    images: [
-      "/person-lifting-weights-training.jpg",
-      "/person-lifting-weights-training.jpg",
-      "/person-lifting-weights-training.jpg",
-    ],
-    about:
-      "NASM certified personal trainer with 8 years of experience. I specialize in strength training, weight loss, and athletic performance. Let's achieve your fitness goals together!",
-    services: [
-      { name: "Personal Training Session", duration: "60 min", price: "$100" },
-      { name: "Strength & Conditioning", duration: "90 min", price: "$140" },
-      { name: "HIIT Training", duration: "45 min", price: "$85" },
-      { name: "Nutrition Consultation", duration: "30 min", price: "$50" },
-    ],
-    thingsToKnow: [
-      "Bring workout clothes and water bottle",
-      "First session includes fitness assessment",
-      "Package deals available for multiple sessions",
-      "Training available at gym or your location",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["6:00 AM", "8:00 AM", "5:00 PM", "7:00 PM"] },
-      { date: "Dec 21", slots: ["6:00 AM", "7:00 AM", "6:00 PM"] },
-      { date: "Dec 22", slots: ["7:00 AM", "9:00 AM", "5:00 PM", "6:00 PM"] },
-    ],
-  },
-  "emma-makeup": {
-    name: "Emma Davis",
-    title: "Professional Makeup Artist",
-    rating: 4.97,
-    reviews: 143,
-    yearsExperience: 12,
-    totalBookings: 1653,
-    weeklyBookings: 15,
-    location: "Manhattan, New York",
-    responseTime: "Within 1 hour",
-    images: [
-      "/makeup-artist-applying-makeup.jpg",
-      "/spa-treatment-with-stones.jpg",
-      "/makeup-artist-applying-makeup.jpg",
-    ],
-    about:
-      "Award-winning makeup artist with 12 years of experience in bridal, editorial, and special events. I use premium products and techniques to enhance your natural beauty.",
-    services: [
-      { name: "Bridal Makeup", duration: "90 min", price: "$120" },
-      { name: "Special Event Makeup", duration: "60 min", price: "$95" },
-      { name: "Makeup Lesson", duration: "90 min", price: "$110" },
-      { name: "Airbrush Makeup", duration: "75 min", price: "$130" },
-    ],
-    thingsToKnow: [
-      "Trial session recommended for bridal makeup",
-      "Come with clean, moisturized face",
-      "Lashes and touch-up kit included",
-      "Travel fee may apply for on-location services",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["9:00 AM", "12:00 PM", "3:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "1:00 PM", "4:00 PM"] },
-      { date: "Dec 22", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "5:00 PM"] },
-    ],
-  },
-  "michael-hair": {
-    name: "Michael Chen",
-    title: "Master Hair Stylist",
-    rating: 5.0,
-    reviews: 189,
-    yearsExperience: 14,
-    totalBookings: 2456,
-    weeklyBookings: 22,
-    location: "Brooklyn, New York",
-    responseTime: "Within 1 hour",
-    images: ["/hairstylist-cutting-hair.jpg", "/hairstylist-cutting-hair.jpg", "/hairstylist-cutting-hair.jpg"],
-    about:
-      "Master stylist with 14 years of experience in cutting, coloring, and styling. Trained in NYC and Paris, I create modern looks that complement your lifestyle and personality.",
-    services: [
-      { name: "Haircut & Style", duration: "60 min", price: "$95" },
-      { name: "Color & Highlights", duration: "120 min", price: "$180" },
-      { name: "Balayage", duration: "150 min", price: "$220" },
-      { name: "Keratin Treatment", duration: "180 min", price: "$250" },
-    ],
-    thingsToKnow: [
-      "Consultation included with all services",
-      "Premium products used (Olaplex, Redken)",
-      "Color patch test required 48 hours before first coloring",
-      "Complimentary blow-dry with all services",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["10:00 AM", "2:00 PM", "5:00 PM"] },
-      { date: "Dec 21", slots: ["9:00 AM", "1:00 PM", "4:00 PM"] },
-      { date: "Dec 22", slots: ["10:00 AM", "12:00 PM", "3:00 PM"] },
-    ],
-  },
-  "sophia-nails": {
-    name: "Sophia Rodriguez",
-    title: "Nail Artist & Technician",
-    rating: 4.92,
-    reviews: 112,
-    yearsExperience: 7,
-    totalBookings: 1289,
-    weeklyBookings: 20,
-    location: "SoHo, New York",
-    responseTime: "Within 2 hours",
-    images: ["/nail-care-manicure.jpg", "/nail-care-manicure.jpg", "/nail-care-manicure.jpg"],
-    about:
-      "Licensed nail technician specializing in nail art, gel extensions, and luxury manicures. I create beautiful, long-lasting nail designs using the highest quality products.",
-    services: [
-      { name: "Gel Manicure", duration: "45 min", price: "$65" },
-      { name: "Gel Pedicure", duration: "60 min", price: "$75" },
-      { name: "Nail Art Design", duration: "90 min", price: "$95" },
-      { name: "Gel Extensions", duration: "120 min", price: "$120" },
-    ],
-    thingsToKnow: [
-      "All tools are sterilized and sanitized",
-      "Wide selection of gel colors available",
-      "Nail art designs can be customized",
-      "Removal service available for previous gel",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["11:00 AM", "1:00 PM", "3:00 PM", "5:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"] },
-      { date: "Dec 22", slots: ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM"] },
-    ],
-  },
   "maya-yoga": {
     name: "Maya Patel",
     title: "Yoga & Meditation Instructor",
@@ -284,174 +90,344 @@ const professionalsData: Record<string, any> = {
       { date: "Dec 21", slots: ["6:00 AM", "8:00 AM", "6:00 PM"] },
       { date: "Dec 22", slots: ["7:00 AM", "10:00 AM", "4:00 PM", "6:00 PM"] },
     ],
+    clientReviews: [
+      {
+        name: "Emily Rodriguez",
+        date: "2 weeks ago",
+        rating: 5,
+        comment: "Maya's yoga sessions have transformed my practice! She's incredibly knowledgeable and creates a safe, nurturing space. Her attention to alignment and breathing has helped me deepen my practice significantly."
+      },
+      {
+        name: "David Chen",
+        date: "1 month ago",
+        rating: 5,
+        comment: "The best yoga instructor I've ever worked with. Maya's meditation and breathwork session helped me manage my stress and anxiety. Highly recommend her to anyone looking for holistic wellness."
+      },
+      {
+        name: "Sarah Thompson",
+        date: "3 weeks ago",
+        rating: 5,
+        comment: "Restorative yoga with Maya is pure bliss. She uses the perfect props and creates such a calming atmosphere. I always leave feeling completely rejuvenated and at peace."
+      },
+      {
+        name: "Michael & Jessica",
+        date: "1 week ago",
+        rating: 5,
+        comment: "We did couples yoga with Maya and it was an amazing experience! It really helped us connect on a deeper level and we learned so much about partner work and communication."
+      }
+    ]
   },
-  "james-physio": {
-    name: "James Wilson",
-    title: "Licensed Physiotherapist",
-    rating: 4.96,
-    reviews: 167,
-    yearsExperience: 11,
-    totalBookings: 1934,
-    weeklyBookings: 19,
+  "sophia-pilates": {
+    name: "Sophia Martinez",
+    title: "Certified Pilates Instructor",
+    rating: 4.97,
+    reviews: 156,
+    yearsExperience: 8,
+    totalBookings: 1834,
+    weeklyBookings: 20,
     location: "Manhattan, New York",
     responseTime: "Within 30 minutes",
-    images: ["/massage-therapy-hands.jpg", "/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg"],
+    images: ["/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
     about:
-      "Licensed physiotherapist with 11 years of experience treating sports injuries, chronic pain, and post-surgical rehabilitation. Evidence-based approach to help you move better and feel stronger.",
+      "Certified Pilates instructor with 8 years of experience in mat and reformer Pilates. I specialize in core strengthening, posture correction, and injury rehabilitation through mindful movement.",
     services: [
-      { name: "Physiotherapy Assessment", duration: "60 min", price: "$120" },
-      { name: "Manual Therapy", duration: "45 min", price: "$95" },
-      { name: "Sports Injury Treatment", duration: "60 min", price: "$110" },
-      { name: "Rehabilitation Program", duration: "90 min", price: "$150" },
+      { 
+        name: "Private Pilates Session", 
+        duration: "60 min", 
+        price: "$85",
+        description: "Personalized mat or reformer Pilates session focused on your specific goals",
+        procedure: [
+          "Assessment of your posture, alignment, and movement patterns",
+          "Warm-up with breathing and core activation exercises (10 min)",
+          "Customized Pilates sequence targeting your needs (40 min)",
+          "Stretching and flexibility work (8 min)",
+          "Cool-down and integration (2 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Reformer Pilates", 
+        duration: "55 min", 
+        price: "$95",
+        description: "Dynamic reformer workout for strength, flexibility, and core stability",
+        procedure: [
+          "Equipment setup and safety overview",
+          "Centering and breathing exercises (5 min)",
+          "Full-body reformer workout with spring resistance (40 min)",
+          "Core-focused exercises and balance work (8 min)",
+          "Final stretch and relaxation (2 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/spa-treatment-with-stones.jpg"]
+      },
+      { 
+        name: "Mat Pilates Class", 
+        duration: "50 min", 
+        price: "$65",
+        description: "Classical mat Pilates focusing on core strength and body control",
+        procedure: [
+          "Introduction to Pilates principles (5 min)",
+          "Warm-up with breathing and pelvic floor activation (5 min)",
+          "Classical mat Pilates sequence (35 min)",
+          "Cool-down stretches and spine mobility (5 min)"
+        ],
+        images: ["/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"]
+      },
+      { 
+        name: "Prenatal Pilates", 
+        duration: "45 min", 
+        price: "$75",
+        description: "Safe and effective Pilates for expecting mothers at all trimesters",
+        procedure: [
+          "Check-in and pregnancy-specific modifications discussion (5 min)",
+          "Gentle warm-up and pelvic floor awareness (10 min)",
+          "Modified Pilates exercises for pregnancy (25 min)",
+          "Relaxation and breathing for labor preparation (5 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
     ],
     thingsToKnow: [
-      "Bring any relevant medical records",
-      "Wear loose, comfortable clothing",
-      "Insurance accepted (check with provider)",
-      "Home exercise program included",
+      "All equipment and props provided",
+      "Wear form-fitting athletic clothing",
+      "Socks with grips recommended",
+      "Let me know about any injuries or conditions",
     ],
     availability: [
-      { date: "Dec 20", slots: ["8:00 AM", "10:00 AM", "2:00 PM", "4:00 PM"] },
-      { date: "Dec 21", slots: ["9:00 AM", "11:00 AM", "1:00 PM", "3:00 PM"] },
-      { date: "Dec 22", slots: ["8:00 AM", "12:00 PM", "2:00 PM"] },
+      { date: "Dec 20", slots: ["8:00 AM", "10:00 AM", "3:00 PM", "5:00 PM"] },
+      { date: "Dec 21", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "4:00 PM"] },
+      { date: "Dec 22", slots: ["8:00 AM", "12:00 PM", "3:00 PM", "6:00 PM"] },
     ],
+    clientReviews: [
+      {
+        name: "Amanda Foster",
+        date: "1 week ago",
+        rating: 5,
+        comment: "Sophia is an exceptional Pilates instructor! Her reformer classes are challenging yet accessible. I've seen amazing improvements in my core strength and posture in just 2 months."
+      },
+      {
+        name: "Jennifer Liu",
+        date: "3 weeks ago",
+        rating: 5,
+        comment: "The prenatal Pilates sessions with Sophia were a lifesaver during my pregnancy. She made me feel safe and strong throughout. Highly recommend for expecting moms!"
+      },
+      {
+        name: "Robert Johnson",
+        date: "2 weeks ago",
+        rating: 5,
+        comment: "I came to Sophia with chronic back pain. Her personalized approach and focus on proper form has made a huge difference. I'm pain-free and stronger than ever."
+      }
+    ]
   },
-  "rachel-nutrition": {
-    name: "Rachel Green",
-    title: "Certified Nutrition Coach",
-    rating: 4.94,
-    reviews: 89,
-    yearsExperience: 7,
-    totalBookings: 1067,
-    weeklyBookings: 14,
-    location: "Queens, New York",
-    responseTime: "Within 2 hours",
+  "luna-vinyasa": {
+    name: "Luna Williams",
+    title: "Vinyasa Flow & Ashtanga Yoga Specialist",
+    rating: 4.98,
+    reviews: 142,
+    yearsExperience: 11,
+    totalBookings: 2156,
+    weeklyBookings: 18,
+    location: "Brooklyn, New York",
+    responseTime: "Within 1 hour",
     images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"],
     about:
-      "Certified nutrition coach and registered dietitian with 7 years of experience. I help clients achieve their health goals through personalized nutrition plans and sustainable lifestyle changes.",
+      "E-RYT 500 certified yoga instructor specializing in Vinyasa Flow and Ashtanga yoga. Trained in India and certified in advanced yoga therapy. I believe in the transformative power of breath-synchronized movement.",
     services: [
-      { name: "Nutrition Consultation", duration: "60 min", price: "$90" },
-      { name: "Meal Planning Session", duration: "45 min", price: "$70" },
-      { name: "Weight Management Program", duration: "90 min", price: "$130" },
-      { name: "Follow-up Session", duration: "30 min", price: "$50" },
+      { 
+        name: "Vinyasa Flow Class", 
+        duration: "75 min", 
+        price: "$80",
+        description: "Dynamic flowing yoga practice linking breath with movement",
+        procedure: [
+          "Centering meditation and intention setting (5 min)",
+          "Pranayama (breath work) practice (10 min)",
+          "Sun salutations and warm-up flow (15 min)",
+          "Peak pose sequence with creative transitions (35 min)",
+          "Cool-down, savasana, and closing meditation (10 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Ashtanga Yoga", 
+        duration: "90 min", 
+        price: "$90",
+        description: "Traditional Ashtanga primary series or personalized practice",
+        procedure: [
+          "Opening chant and breathing exercises (5 min)",
+          "Sun salutation A & B sequences (10 min)",
+          "Standing sequence (20 min)",
+          "Seated sequence and forward folds (30 min)",
+          "Finishing sequence, backbends, and inversions (15 min)",
+          "Final relaxation and closing chant (10 min)"
+        ],
+        images: ["/massage-therapy-hands.jpg", "/spa-treatment-with-stones.jpg"]
+      },
+      { 
+        name: "Power Yoga", 
+        duration: "60 min", 
+        price: "$75",
+        description: "Intense, fitness-based yoga for strength and stamina",
+        procedure: [
+          "Dynamic warm-up and breath connection (10 min)",
+          "Power flow with strength-building poses (35 min)",
+          "Core work and arm balances (10 min)",
+          "Cool-down and final relaxation (5 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/spa-treatment-with-stones.jpg"]
+      },
+      { 
+        name: "Yin Yoga & Meditation", 
+        duration: "75 min", 
+        price: "$70",
+        description: "Slow-paced practice with long-held poses for deep tissue release",
+        procedure: [
+          "Guided meditation and body scan (10 min)",
+          "Yin yoga poses held 3-5 minutes each (50 min)",
+          "Pranayama and energy work (10 min)",
+          "Closing meditation in savasana (5 min)"
+        ],
+        images: ["/spa-treatment-with-stones.jpg", "/massage-therapy-hands.jpg"]
+      },
     ],
     thingsToKnow: [
-      "Bring food diary if available",
-      "Lab results welcome for review",
-      "Customized meal plans provided",
-      "Virtual sessions available",
+      "Bring your own mat or rent for $5",
+      "Water bottle recommended",
+      "Classes suitable for intermediate to advanced practitioners",
+      "Modifications offered for all levels",
     ],
     availability: [
-      { date: "Dec 20", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "5:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "1:00 PM", "3:00 PM", "6:00 PM"] },
-      { date: "Dec 22", slots: ["9:00 AM", "12:00 PM", "4:00 PM"] },
+      { date: "Dec 20", slots: ["6:00 AM", "9:00 AM", "6:00 PM", "7:30 PM"] },
+      { date: "Dec 21", slots: ["6:00 AM", "10:00 AM", "5:00 PM"] },
+      { date: "Dec 22", slots: ["7:00 AM", "9:00 AM", "4:00 PM", "6:00 PM"] },
     ],
+    clientReviews: [
+      {
+        name: "Marcus Anderson",
+        date: "1 week ago",
+        rating: 5,
+        comment: "Luna's Ashtanga classes are authentic and challenging in the best way. Her guidance and adjustments have helped me progress safely in my practice."
+      },
+      {
+        name: "Olivia Park",
+        date: "2 weeks ago",
+        rating: 5,
+        comment: "The Vinyasa Flow with Luna is absolutely beautiful. She creates such artistic sequences and her cueing is perfect. I leave every class feeling energized and centered."
+      },
+      {
+        name: "Daniel Torres",
+        date: "3 days ago",
+        rating: 5,
+        comment: "Power yoga with Luna kicks my butt every time (in a good way!). She pushes you to your edge while keeping it safe. Best workout and meditation combined."
+      },
+      {
+        name: "Grace Mitchell",
+        date: "1 month ago",
+        rating: 5,
+        comment: "Luna's Yin Yoga and Meditation class is my weekly sanctuary. The deep stretches and her soothing voice create the most peaceful experience."
+      }
+    ]
   },
-  "olivia-skincare": {
-    name: "Olivia Thompson",
-    title: "Licensed Esthetician",
-    rating: 4.98,
-    reviews: 121,
-    yearsExperience: 10,
-    totalBookings: 1432,
-    weeklyBookings: 17,
-    location: "Upper West Side, New York",
-    responseTime: "Within 1 hour",
-    images: [
-      "/makeup-artist-applying-makeup.jpg",
-      "/spa-treatment-with-stones.jpg",
-      "/makeup-artist-applying-makeup.jpg",
-    ],
-    about:
-      "Licensed esthetician with 10 years of experience in advanced skincare treatments. Specializing in facials, chemical peels, and anti-aging treatments using medical-grade products.",
-    services: [
-      { name: "Custom Facial", duration: "75 min", price: "$110" },
-      { name: "Chemical Peel", duration: "60 min", price: "$130" },
-      { name: "Microdermabrasion", duration: "60 min", price: "$120" },
-      { name: "LED Light Therapy", duration: "45 min", price: "$85" },
-    ],
-    thingsToKnow: [
-      "Skin analysis included with first visit",
-      "Avoid sun exposure before chemical peels",
-      "Home care products recommended",
-      "Series packages available at discount",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["10:00 AM", "1:00 PM", "4:00 PM"] },
-      { date: "Dec 21", slots: ["9:00 AM", "12:00 PM", "3:00 PM"] },
-      { date: "Dec 22", slots: ["11:00 AM", "2:00 PM", "5:00 PM"] },
-    ],
-  },
-  "alex-brows": {
-    name: "Alex Kim",
-    title: "Eyebrow Specialist",
-    rating: 4.93,
-    reviews: 95,
-    yearsExperience: 6,
-    totalBookings: 1156,
-    weeklyBookings: 13,
-    location: "Tribeca, New York",
-    responseTime: "Within 2 hours",
-    images: [
-      "/makeup-artist-applying-makeup.jpg",
-      "/spa-treatment-with-stones.jpg",
-      "/makeup-artist-applying-makeup.jpg",
-    ],
-    about:
-      "Certified eyebrow specialist with expertise in microblading, brow lamination, and precision shaping. I create natural-looking, perfectly shaped brows that frame your face beautifully.",
-    services: [
-      { name: "Eyebrow Shaping", duration: "30 min", price: "$75" },
-      { name: "Brow Lamination", duration: "60 min", price: "$95" },
-      { name: "Microblading", duration: "120 min", price: "$350" },
-      { name: "Brow Tinting", duration: "30 min", price: "$45" },
-    ],
-    thingsToKnow: [
-      "Consultation included with all services",
-      "Patch test required 24 hours before tinting",
-      "Microblading requires touch-up after 6 weeks",
-      "Aftercare instructions provided",
-    ],
-    availability: [
-      { date: "Dec 20", slots: ["9:00 AM", "12:00 PM", "2:00 PM", "4:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "11:00 AM", "1:00 PM", "3:00 PM"] },
-      { date: "Dec 22", slots: ["10:00 AM", "1:00 PM", "4:00 PM"] },
-    ],
-  },
-  "nina-lashes": {
-    name: "Nina Foster",
-    title: "Lash Extension Specialist",
+  "kai-pilates": {
+    name: "Kai Thompson",
+    title: "Advanced Pilates & Barre Instructor",
     rating: 4.96,
-    reviews: 108,
-    yearsExperience: 6,
-    totalBookings: 1298,
-    weeklyBookings: 21,
-    location: "East Village, New York",
-    responseTime: "Within 1 hour",
-    images: [
-      "/makeup-artist-applying-makeup.jpg",
-      "/makeup-artist-applying-makeup.jpg",
-      "/makeup-artist-applying-makeup.jpg",
-    ],
+    reviews: 128,
+    yearsExperience: 7,
+    totalBookings: 1456,
+    weeklyBookings: 17,
+    location: "West Village, New York",
+    responseTime: "Within 2 hours",
+    images: ["/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg", "/person-lifting-weights-training.jpg"],
     about:
-      "Certified lash artist with 6 years of experience in classic, volume, and mega volume lash extensions. I use premium products and techniques for beautiful, long-lasting results.",
+      "Comprehensively certified Pilates instructor with advanced training in classical and contemporary Pilates. Also certified in Barre and functional movement. I help clients build long, lean muscles and develop body awareness.",
     services: [
-      { name: "Classic Lash Extensions", duration: "120 min", price: "$85" },
-      { name: "Volume Lash Extensions", duration: "150 min", price: "$120" },
-      { name: "Mega Volume Lashes", duration: "180 min", price: "$150" },
-      { name: "Lash Fill", duration: "60 min", price: "$60" },
+      { 
+        name: "Barre Fusion Class", 
+        duration: "50 min", 
+        price: "$70",
+        description: "Ballet-inspired workout combining Pilates, dance, and strength training",
+        procedure: [
+          "Warm-up with light cardio and stretching (8 min)",
+          "Barre work - legs, glutes, and thighs (20 min)",
+          "Upper body sculpting with light weights (10 min)",
+          "Core work and planks (10 min)",
+          "Final stretch and cooldown (2 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg"]
+      },
+      { 
+        name: "Tower Pilates", 
+        duration: "60 min", 
+        price: "$90",
+        description: "Unique Pilates apparatus work for full-body conditioning",
+        procedure: [
+          "Body alignment check and tower setup (5 min)",
+          "Upper body and arm work on tower (15 min)",
+          "Lower body and leg springs exercises (20 min)",
+          "Core and abdominal series (15 min)",
+          "Stretching on the tower (5 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/spa-treatment-with-stones.jpg"]
+      },
+      { 
+        name: "Chair Pilates", 
+        duration: "45 min", 
+        price: "$80",
+        description: "Challenging Pilates using the specialized Wunda Chair",
+        procedure: [
+          "Introduction to chair apparatus (5 min)",
+          "Lower body strengthening exercises (15 min)",
+          "Upper body and back work (15 min)",
+          "Balance and stability challenges (8 min)",
+          "Cool-down stretch (2 min)"
+        ],
+        images: ["/massage-therapy-hands.jpg", "/person-lifting-weights-training.jpg"]
+      },
+      { 
+        name: "Athletic Pilates", 
+        duration: "55 min", 
+        price: "$85",
+        description: "High-intensity Pilates for athletes and fitness enthusiasts",
+        procedure: [
+          "Dynamic warm-up and mobility work (10 min)",
+          "Power-based Pilates exercises (30 min)",
+          "Plyometric core work (10 min)",
+          "Flexibility and recovery stretches (5 min)"
+        ],
+        images: ["/person-lifting-weights-training.jpg", "/massage-therapy-hands.jpg"]
+      },
     ],
     thingsToKnow: [
-      "Come with clean lashes (no makeup)",
-      "Avoid caffeine before appointment",
-      "Lashes last 4-6 weeks with proper care",
-      "Aftercare kit included",
+      "Grippy socks required for Barre classes",
+      "All equipment sanitized between sessions",
+      "Private and semi-private sessions available",
+      "Package deals for multiple sessions",
     ],
     availability: [
-      { date: "Dec 20", slots: ["9:00 AM", "12:00 PM", "3:00 PM"] },
-      { date: "Dec 21", slots: ["10:00 AM", "1:00 PM", "4:00 PM"] },
-      { date: "Dec 22", slots: ["9:00 AM", "11:00 AM", "2:00 PM", "5:00 PM"] },
+      { date: "Dec 20", slots: ["7:00 AM", "11:00 AM", "4:00 PM", "6:00 PM"] },
+      { date: "Dec 21", slots: ["8:00 AM", "10:00 AM", "3:00 PM", "5:00 PM"] },
+      { date: "Dec 22", slots: ["7:00 AM", "12:00 PM", "4:00 PM"] },
     ],
-  },
+    clientReviews: [
+      {
+        name: "Victoria Adams",
+        date: "5 days ago",
+        rating: 5,
+        comment: "Kai's Barre Fusion classes are addictive! The burn is real but so worth it. I've never felt stronger or more toned. His energy is contagious!"
+      },
+      {
+        name: "Ethan Cooper",
+        date: "2 weeks ago",
+        rating: 5,
+        comment: "As a runner, Athletic Pilates with Kai has been game-changing for my performance and injury prevention. His knowledge of functional movement is impressive."
+      },
+      {
+        name: "Isabella Santos",
+        date: "1 week ago",
+        rating: 5,
+        comment: "Tower Pilates is my favorite workout ever! Kai is so patient and explains everything clearly. I love the challenge and variety in each session."
+      }
+    ]
+  }
 }
 
 export default function ProfessionalProfile({ params }: { params: Promise<{ id: string }> }) {
@@ -462,7 +438,7 @@ export default function ProfessionalProfile({ params }: { params: Promise<{ id: 
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const professional = professionalsData[id] || professionalsData["sarah-massage"]
+  const professional = professionalsData[id] || professionalsData["maya-yoga"]
 
   // Auto-rotate carousel
   useEffect(() => {
@@ -550,9 +526,9 @@ export default function ProfessionalProfile({ params }: { params: Promise<{ id: 
             </div>
             
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+              <Leaf className="w-5 h-5 text-primary fill-primary" />
               <div>
-                <span className="text-2xl font-bold text-amber-500">{professional.rating}</span>
+                <span className="text-2xl font-bold text-primary">{professional.rating}</span>
                 <span className="text-sm text-muted-foreground ml-1">({professional.reviews} reviews)</span>
               </div>
             </div>
@@ -662,6 +638,31 @@ export default function ProfessionalProfile({ params }: { params: Promise<{ id: 
                 ))}
               </div>
             </section>
+
+            {/* Client Reviews */}
+            {professional.clientReviews && professional.clientReviews.length > 0 && (
+              <section className="bg-card border border-border rounded-lg p-6">
+                <h2 className="text-2xl font-semibold mb-4">Client Reviews</h2>
+                <div className="space-y-4">
+                  {professional.clientReviews.map((review: any, index: number) => (
+                    <div key={index} className="border-b border-border last:border-0 pb-4 last:pb-0">
+                      <div className="flex items-start justify-between mb-2">
+                        <div>
+                          <h4 className="font-semibold">{review.name}</h4>
+                          <p className="text-xs text-muted-foreground">{review.date}</p>
+                        </div>
+                        <div className="flex gap-0.5">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <Leaf key={i} className="w-4 h-4 text-primary fill-primary" />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{review.comment}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Location */}
             <section className="bg-card border border-border rounded-lg p-6">

@@ -6,50 +6,50 @@ import { Play, Headphones, Video, FileText } from "lucide-react"
 export default function ResourcesPage() {
   const podcasts = [
     {
-      title: "The Beauty Business Blueprint",
-      host: "Emma Davis",
+      title: "The Mindful Movement",
+      host: "Maya Chen",
       episodes: 45,
-      image: "/makeup-artist-applying-makeup.jpg",
-      description: "Learn how to grow your beauty business from industry experts",
+      image: "/yoga-women.jpg",
+      description: "Explore the intersection of yoga, meditation, and mindful living",
     },
     {
-      title: "Wellness Wisdom",
-      host: "Sarah Johnson",
+      title: "Pilates Power Hour",
+      host: "Sophia Anderson",
       episodes: 32,
-      image: "/spa-treatment-with-stones.jpg",
-      description: "Insights on holistic wellness and spa management",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      description: "Core strength, alignment, and the science behind Pilates",
     },
     {
-      title: "Hair Talk with Michael",
-      host: "Michael Chen",
+      title: "Breathwork & Beyond",
+      host: "Luna Martinez",
       episodes: 28,
-      image: "/hairstylist-cutting-hair.jpg",
-      description: "Latest trends and techniques in hair styling",
+      image: "/spa-treatment-with-stones.jpg",
+      description: "Deep dives into pranayama, breathwork, and energy flow",
     },
   ]
 
   const articles = [
     {
-      title: "10 Tips to Boost Your Booking Rate",
-      author: "Lisa Anderson",
+      title: "Building a Successful Yoga Teaching Business",
+      author: "Maya Chen",
       readTime: "5 min read",
       category: "Business Growth",
     },
     {
-      title: "Creating an Instagram Strategy That Works",
-      author: "David Martinez",
+      title: "Social Media for Yoga & Pilates Instructors",
+      author: "Luna Martinez",
       readTime: "8 min read",
       category: "Marketing",
     },
     {
-      title: "Client Retention: Building Lasting Relationships",
-      author: "Sophia Williams",
+      title: "Creating Sacred Space: Studio Design Tips",
+      author: "Sophia Anderson",
       readTime: "6 min read",
-      category: "Client Care",
+      category: "Studio Setup",
     },
     {
-      title: "Pricing Your Services: A Complete Guide",
-      author: "Emma Davis",
+      title: "Pricing Your Classes: Finding the Balance",
+      author: "Kai Thompson",
       readTime: "10 min read",
       category: "Business",
     },
@@ -57,33 +57,33 @@ export default function ResourcesPage() {
 
   const videos = [
     {
-      title: "Advanced Makeup Techniques Masterclass",
-      creator: "Emma Davis",
+      title: "Advanced Vinyasa Sequencing Masterclass",
+      creator: "Luna Martinez",
       duration: "45:30",
       views: "12.5K",
     },
     {
-      title: "Building Your Personal Brand",
-      creator: "Michael Chen",
+      title: "Building Your Yoga Teaching Brand",
+      creator: "Maya Chen",
       duration: "32:15",
       views: "8.2K",
     },
     {
-      title: "Massage Therapy Best Practices",
-      creator: "Sarah Johnson",
+      title: "Pilates Reformer: Complete Guide",
+      creator: "Sophia Anderson",
       duration: "28:45",
       views: "15.3K",
     },
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen w-full bg-background">
       <Header />
 
-      <main className="px-6 lg:px-20 py-12">
+      <main className="min-h-screen w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-12 max-w-[1920px] mx-auto">
         <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4">Resources</h1>
-          <p className="text-xl text-muted-foreground">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Resources 📚</h1>
+          <p className="text-lg sm:text-xl text-muted-foreground">
             Podcasts, articles, and content created by our community of professionals
           </p>
         </div>

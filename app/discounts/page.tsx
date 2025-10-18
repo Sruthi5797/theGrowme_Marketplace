@@ -1,70 +1,73 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { DiscountCard } from "@/components/discount-card"
+import { motion } from "framer-motion"
 
 export default function DiscountsPage() {
   const allDiscounts = [
     {
-      image: "/spa-treatment-with-stones.jpg",
-      title: "Luxury Spa Package",
+      image: "/yoga-women.jpg",
+      title: "10-Class Yoga Package",
       discount: "30% OFF",
-      originalPrice: "$200",
-      discountedPrice: "$140",
+      originalPrice: "$700",
+      discountedPrice: "$490",
       validUntil: "Dec 31",
     },
     {
-      image: "/massage-therapy-hands.jpg",
-      title: "Deep Tissue Massage",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "8-Session Pilates Reformer Pack",
       discount: "25% OFF",
-      originalPrice: "$120",
-      discountedPrice: "$90",
+      originalPrice: "$680",
+      discountedPrice: "$510",
       validUntil: "Dec 25",
     },
     {
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Bridal Makeup Package",
+      image: "/spa-treatment-with-stones.jpg",
+      title: "Monthly Unlimited Yoga Pass",
       discount: "20% OFF",
       originalPrice: "$250",
       discountedPrice: "$200",
       validUntil: "Jan 15",
     },
     {
-      image: "/hairstylist-cutting-hair.jpg",
-      title: "Hair Color & Style",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "Private Pilates 5-Pack",
       discount: "15% OFF",
-      originalPrice: "$150",
-      discountedPrice: "$127",
+      originalPrice: "$425",
+      discountedPrice: "$361",
       validUntil: "Dec 28",
     },
     {
-      image: "/nail-care-manicure.jpg",
-      title: "Gel Manicure & Pedicure",
+      image: "/yoga-women.jpg",
+      title: "Yoga & Meditation Starter Pack",
       discount: "20% OFF",
-      originalPrice: "$80",
-      discountedPrice: "$64",
+      originalPrice: "$150",
+      discountedPrice: "$120",
       validUntil: "Dec 30",
     },
     {
       image: "/spa-treatment-with-stones.jpg",
-      title: "Hot Stone Massage",
+      title: "Restorative Yoga Series (6 weeks)",
       discount: "35% OFF",
-      originalPrice: "$180",
-      discountedPrice: "$117",
+      originalPrice: "$420",
+      discountedPrice: "$273",
       validUntil: "Jan 5",
     },
     {
-      image: "/person-lifting-weights-training.jpg",
-      title: "10-Session Training Package",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "Pilates Reformer 10-Pack",
       discount: "40% OFF",
-      originalPrice: "$1000",
-      discountedPrice: "$600",
+      originalPrice: "$850",
+      discountedPrice: "$510",
       validUntil: "Jan 10",
     },
     {
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Skincare Consultation & Treatment",
+      image: "/yoga-women.jpg",
+      title: "Power Yoga 12-Class Bundle",
       discount: "25% OFF",
-      originalPrice: "$160",
-      discountedPrice: "$120",
+      originalPrice: "$900",
+      discountedPrice: "$675",
       validUntil: "Dec 29",
     },
   ]
@@ -72,18 +75,35 @@ export default function DiscountsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="px-6 lg:px-20 py-12">
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold mb-4">Exclusive Discounts</h1>
-          <p className="text-xl text-muted-foreground">
-            Save big on premium beauty and wellness services from our top-rated professionals
+      <main className="min-h-screen w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-12 max-w-[1920px] mx-auto">
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">Exclusive Discounts 🎉</h1>
+          <p className="text-lg sm:text-xl text-muted-foreground">
+            Save big on premium yoga and Pilates packages from our top-rated instructors
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        </motion.div>
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           {allDiscounts.map((discount, index) => (
-            <DiscountCard key={index} {...discount} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <DiscountCard {...discount} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </main>
     </div>
   )

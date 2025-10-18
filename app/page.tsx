@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { motion } from "framer-motion"
 import { Header } from "@/components/header"
 import { CTABanner } from "@/components/cta-banner"
 import { SearchBar } from "@/components/search-bar"
@@ -20,146 +21,65 @@ export default function Home() {
 
   const wellnessProfessionals = [
     {
-      id: "sarah-massage",
-      image: "/massage-therapy-hands.jpg",
-      title: "Therapeutic Massage with Sarah",
-      location: "Downtown, New York",
-      price: "From $85 per session",
-      rating: 5.0,
-      bookings: 428,
-      reviews: 367,
-    },
-    {
-      id: "lisa-spa",
-      image: "/spa-treatment-with-stones.jpg",
-      title: "Luxury Spa Experience with Lisa",
-      location: "Upper East Side, New York",
-      price: "From $150 per session",
-      rating: 4.95,
-      bookings: 356,
-      reviews: 298,
-    },
-    {
-      id: "david-training",
-      image: "/person-lifting-weights-training.jpg",
-      title: "Personal Training with David",
-      location: "Chelsea, New York",
-      price: "From $100 per session",
-      rating: 4.98,
-      bookings: 521,
-      reviews: 445,
-    },
-    {
       id: "maya-yoga",
       image: "/spa-treatment-with-stones.jpg",
       title: "Yoga & Meditation with Maya",
       location: "Brooklyn, New York",
       price: "From $70 per session",
       rating: 4.99,
-      bookings: 245,
-      reviews: 189,
+      bookings: 1543,
+      reviews: 134,
     },
     {
-      id: "alex-pilates",
+      id: "sophia-pilates",
       image: "/person-lifting-weights-training.jpg",
-      title: "Pilates Training with Alex",
+      title: "Pilates Training with Sophia",
       location: "Manhattan, New York",
       price: "From $85 per session",
       rating: 4.97,
-      bookings: 312,
-      reviews: 256,
+      bookings: 1834,
+      reviews: 156,
     },
     {
-      id: "rachel-nutrition",
+      id: "luna-vinyasa",
       image: "/spa-treatment-with-stones.jpg",
-      title: "Nutrition Coaching with Rachel",
-      location: "Queens, New York",
-      price: "From $90 per session",
-      rating: 4.94,
-      bookings: 178,
+      title: "Vinyasa Flow with Luna",
+      location: "Brooklyn, New York",
+      price: "From $75 per session",
+      rating: 4.98,
+      bookings: 2156,
       reviews: 142,
+    },
+    {
+      id: "kai-pilates",
+      image: "/person-lifting-weights-training.jpg",
+      title: "Barre & Pilates with Kai",
+      location: "West Village, New York",
+      price: "From $70 per session",
+      rating: 4.96,
+      bookings: 1456,
+      reviews: 128,
     },
   ]
 
-  const beautyProfessionals = [
-    {
-      id: "emma-makeup",
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Professional Makeup by Emma",
-      location: "Manhattan, New York",
-      price: "From $120 per session",
-      rating: 4.97,
-      bookings: 389,
-      reviews: 312,
-    },
-    {
-      id: "michael-hair",
-      image: "/hairstylist-cutting-hair.jpg",
-      title: "Hair Styling with Michael",
-      location: "Brooklyn, New York",
-      price: "From $95 per session",
-      rating: 5.0,
-      bookings: 467,
-      reviews: 401,
-    },
-    {
-      id: "sophia-nails",
-      image: "/nail-care-manicure.jpg",
-      title: "Nail Art by Sophia",
-      location: "SoHo, New York",
-      price: "From $65 per session",
-      rating: 4.92,
-      bookings: 234,
-      reviews: 198,
-    },
-    {
-      id: "olivia-skincare",
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Skincare Specialist Olivia",
-      location: "Upper West Side, New York",
-      price: "From $110 per session",
-      rating: 4.98,
-      bookings: 412,
-      reviews: 356,
-    },
-    {
-      id: "alex-brows",
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Eyebrow Artistry by Alex",
-      location: "Tribeca, New York",
-      price: "From $75 per session",
-      rating: 4.93,
-      bookings: 289,
-      reviews: 245,
-    },
-    {
-      id: "nina-lashes",
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Lash Extensions with Nina",
-      location: "East Village, New York",
-      price: "From $85 per session",
-      rating: 4.96,
-      bookings: 334,
-      reviews: 278,
-    },
-  ]
+  const beautyProfessionals: any[] = []
 
   const nearMeEvents = [
     {
       id: "workshop-1",
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Natural Makeup Workshop for Beginners",
+      image: "/yoga-women.jpg",
+      title: "Vinyasa Flow Workshop for Beginners",
       type: "workshop" as const,
-      location: "Manhattan Studio, NY",
+      location: "Brooklyn Yoga Studio, NY",
       date: "Dec 18",
       time: "2:00 PM",
-      attendees: 12,
-      price: "$45",
+      attendees: 18,
+      price: "$35",
     },
     {
       id: "meetup-1",
       image: "/spa-treatment-with-stones.jpg",
-      title: "Wellness Community Meetup & Meditation",
+      title: "Meditation & Mindfulness Meetup",
       type: "meetup" as const,
       location: "Central Park, NY",
       date: "Dec 19",
@@ -169,220 +89,184 @@ export default function Home() {
     },
     {
       id: "workshop-2",
-      image: "/hairstylist-cutting-hair.jpg",
-      title: "Hair Styling Techniques Masterclass",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "Pilates Mat Work Fundamentals",
       type: "workshop" as const,
-      location: "Brooklyn Salon, NY",
+      location: "Manhattan Pilates Studio, NY",
       date: "Dec 20",
       time: "3:00 PM",
       attendees: 15,
-      price: "$60",
+      price: "$40",
     },
     {
       id: "class-1",
-      image: "/person-lifting-weights-training.jpg",
-      title: "Group Fitness Bootcamp",
+      image: "/yoga-women.jpg",
+      title: "Power Yoga Group Class",
       type: "class" as const,
-      location: "Chelsea Gym, NY",
+      location: "West Village Yoga, NY",
       date: "Dec 21",
       time: "6:00 PM",
-      attendees: 20,
+      attendees: 22,
       price: "$25",
     },
     {
       id: "meetup-2",
-      image: "/massage-therapy-hands.jpg",
-      title: "Self-Care & Wellness Networking",
+      image: "/spa-treatment-with-stones.jpg",
+      title: "Yoga & Wellness Community Gathering",
       type: "meetup" as const,
-      location: "SoHo Cafe, NY",
+      location: "SoHo Wellness Center, NY",
       date: "Dec 22",
       time: "5:00 PM",
-      attendees: 35,
+      attendees: 30,
       price: "Free",
     },
   ]
 
   const discounts = [
     {
-      image: "/spa-treatment-with-stones.jpg",
-      title: "Luxury Spa Package",
+      image: "/yoga-women.jpg",
+      title: "10-Class Yoga Package",
       discount: "30% OFF",
-      originalPrice: "$200",
-      discountedPrice: "$140",
+      originalPrice: "$700",
+      discountedPrice: "$490",
       validUntil: "Dec 31",
     },
     {
-      image: "/massage-therapy-hands.jpg",
-      title: "Deep Tissue Massage",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "8-Session Pilates Reformer Pack",
       discount: "25% OFF",
-      originalPrice: "$120",
-      discountedPrice: "$90",
+      originalPrice: "$680",
+      discountedPrice: "$510",
       validUntil: "Dec 25",
     },
     {
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Bridal Makeup Package",
+      image: "/spa-treatment-with-stones.jpg",
+      title: "Monthly Unlimited Yoga Pass",
       discount: "20% OFF",
       originalPrice: "$250",
       discountedPrice: "$200",
       validUntil: "Jan 15",
     },
     {
-      image: "/hairstylist-cutting-hair.jpg",
-      title: "Hair Color & Style",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "Private Pilates 5-Pack",
       discount: "15% OFF",
-      originalPrice: "$150",
-      discountedPrice: "$127",
+      originalPrice: "$425",
+      discountedPrice: "$361",
       validUntil: "Dec 28",
     },
     {
-      image: "/nail-care-manicure.jpg",
-      title: "Gel Manicure & Pedicure",
+      image: "/yoga-women.jpg",
+      title: "Yoga & Meditation Starter Pack",
       discount: "20% OFF",
-      originalPrice: "$80",
-      discountedPrice: "$64",
+      originalPrice: "$150",
+      discountedPrice: "$120",
       validUntil: "Dec 30",
     },
   ]
 
   const onlineClasses = [
     {
-      image: "/person-lifting-weights-training.jpg",
-      title: "Full Body HIIT Workout",
-      instructor: "Sarah Johnson",
+      image: "/yoga-women.jpg",
+      title: "Vinyasa Flow Live Class",
+      instructor: "Luna Martinez",
       date: "Dec 20, 6:00 PM",
-      duration: "45 min",
-      price: "$15",
-    },
-    {
-      image: "/massage-therapy-hands.jpg",
-      title: "Self-Massage Techniques",
-      instructor: "Michael Chen",
-      date: "Dec 22, 7:00 PM",
       duration: "60 min",
       price: "$20",
     },
     {
-      image: "/makeup-artist-applying-makeup.jpg",
-      title: "Everyday Makeup Masterclass",
-      instructor: "Emma Davis",
-      date: "Dec 23, 5:00 PM",
-      duration: "90 min",
-      price: "$25",
+      image: "/woman-doing-pilates-with-ball.jpg",
+      title: "Core Strength Pilates",
+      instructor: "Sophia Anderson",
+      date: "Dec 22, 7:00 PM",
+      duration: "45 min",
+      price: "$22",
     },
     {
       image: "/spa-treatment-with-stones.jpg",
-      title: "Meditation & Wellness",
-      instructor: "Lisa Anderson",
-      date: "Dec 21, 8:00 AM",
+      title: "Guided Meditation & Breathwork",
+      instructor: "Maya Chen",
+      date: "Dec 23, 8:00 AM",
       duration: "30 min",
-      price: "$10",
+      price: "$15",
+    },
+    {
+      image: "/yoga-women.jpg",
+      title: "Restorative Yoga Evening Session",
+      instructor: "Luna Martinez",
+      date: "Dec 21, 7:30 PM",
+      duration: "60 min",
+      price: "$20",
     },
   ]
 
   const collaborations = [
     {
-      id: "yoga-nutrition",
+      id: "yoga-pilates-fusion",
       professional1: {
         name: "Maya Chen",
-        role: "Yoga Teacher",
-        image: "/spa-treatment-with-stones.jpg",
+        role: "Yoga Instructor",
+        image: "/yoga-women.jpg",
       },
       professional2: {
-        name: "Rachel Green",
-        role: "Nutritionist",
-        image: "/spa-treatment-with-stones.jpg",
+        name: "Sophia Anderson",
+        role: "Pilates Instructor",
+        image: "/woman-doing-pilates-with-ball.jpg",
       },
-      title: "Yoga + Nutrition Plan",
+      title: "Yoga & Pilates Fusion",
       description:
-        "Transform your wellness journey with personalized yoga sessions and a custom nutrition plan designed to complement your practice.",
-      price: "$280",
+        "Experience the best of both worlds with integrated yoga and Pilates sessions designed to build flexibility, strength, and mindfulness.",
+      price: "$240",
       duration: "4 weeks",
     },
     {
-      id: "massage-yoga",
+      id: "mindful-movement",
       professional1: {
-        name: "Sarah Johnson",
-        role: "Massage Therapist",
-        image: "/massage-therapy-hands.jpg",
+        name: "Luna Martinez",
+        role: "Vinyasa Yoga Teacher",
+        image: "/yoga-women.jpg",
       },
       professional2: {
         name: "Maya Chen",
-        role: "Yoga Teacher",
+        role: "Meditation Guide",
         image: "/spa-treatment-with-stones.jpg",
       },
-      title: "Relax & Rejuvenate Duo",
+      title: "Mindful Movement & Meditation",
       description:
-        "Experience deep relaxation with therapeutic massage followed by restorative yoga to release tension and restore balance.",
+        "Combine flowing vinyasa yoga with guided meditation practices for complete mind-body wellness and stress relief.",
       price: "$220",
-      duration: "2 hours",
-    },
-    {
-      id: "nails-tattoo",
-      professional1: {
-        name: "Sophia Martinez",
-        role: "Nail Artist",
-        image: "/nail-care-manicure.jpg",
-      },
-      professional2: {
-        name: "Alex Rivera",
-        role: "Tattoo Artist",
-        image: "/nail-care-manicure.jpg",
-      },
-      title: "Art & Expression Package",
-      description:
-        "Get stunning nail art and a small custom tattoo in one session. Perfect for those who love body art and self-expression.",
-      price: "$350",
-      duration: "3 hours",
-    },
-    {
-      id: "makeup-hair",
-      professional1: {
-        name: "Emma Davis",
-        role: "Makeup Artist",
-        image: "/makeup-artist-applying-makeup.jpg",
-      },
-      professional2: {
-        name: "Michael Chen",
-        role: "Hair Stylist",
-        image: "/hairstylist-cutting-hair.jpg",
-      },
-      title: "Complete Glam Package",
-      description:
-        "Look your absolute best with professional hair styling and makeup application. Ideal for special events, photoshoots, or weddings.",
-      price: "$295",
-      duration: "2.5 hours",
-    },
-    {
-      id: "pilates-nutrition",
-      professional1: {
-        name: "Alex Thompson",
-        role: "Pilates Instructor",
-        image: "/person-lifting-weights-training.jpg",
-      },
-      professional2: {
-        name: "Rachel Green",
-        role: "Nutritionist",
-        image: "/spa-treatment-with-stones.jpg",
-      },
-      title: "Core Strength & Nutrition",
-      description:
-        "Build core strength with Pilates training while following a personalized meal plan to fuel your fitness goals.",
-      price: "$310",
       duration: "6 weeks",
+    },
+    {
+      id: "core-flexibility",
+      professional1: {
+        name: "Kai Thompson",
+        role: "Barre & Pilates Instructor",
+        image: "/woman-doing-pilates-with-ball.jpg",
+      },
+      professional2: {
+        name: "Luna Martinez",
+        role: "Yoga Teacher",
+        image: "/yoga-women.jpg",
+      },
+      title: "Core Strength & Flexibility",
+      description:
+        "Build a strong, flexible body with targeted Pilates core work and yoga stretching sequences designed to complement each other.",
+      price: "$265",
+      duration: "8 weeks",
     },
   ]
 
   const displayedProfessionals = selectedCategory === "wellness" ? wellnessProfessionals : beautyProfessionals
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen w-full bg-background overflow-x-hidden">
       <Header />
       <CTABanner />
       <SearchBar />
       <CategoriesScroll />
 
-      <main className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12">
         <NearMeSection events={nearMeEvents} />
 
         <section className="mb-12">
@@ -406,19 +290,27 @@ export default function Home() {
         </section>
 
         <section className="mb-20">
-          <div className="bg-gradient-to-br from-primary/10 via-pink-50 to-rose-50 rounded-3xl p-8">
-            <div className="flex items-center justify-between mb-8">
+          <div className="bg-gradient-to-br from-primary/10 via-pink-50 to-rose-50 rounded-3xl p-6 sm:p-8">
+            <div className="flex items-center justify-between mb-8 gap-4">
               <div>
-                <h2 className="text-4xl font-bold mb-3">Featured This Week</h2>
-                <p className="text-lg text-muted-foreground">Hand-picked professionals for exceptional service</p>
+                <h2 className="text-3xl sm:text-4xl font-bold mb-2 sm:mb-3">Featured This Week</h2>
+                <p className="text-base sm:text-lg text-muted-foreground">Hand-picked professionals for exceptional service</p>
               </div>
               <div className="flex gap-2">
-                <button className="p-2 border border-border rounded-full hover:bg-white transition-colors">
+                <motion.button
+                  className="p-2 border border-border rounded-full bg-white shadow-md"
+                  whileHover={{ scale: 1.1, x: -3 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button className="p-2 border border-border rounded-full hover:bg-white transition-colors">
+                </motion.button>
+                <motion.button
+                  className="p-2 border border-border rounded-full bg-white shadow-md"
+                  whileHover={{ scale: 1.1, x: 3 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <ChevronRight className="w-4 h-4" />
-                </button>
+                </motion.button>
               </div>
             </div>
             <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
@@ -442,12 +334,20 @@ export default function Home() {
               <p className="text-lg text-muted-foreground">Limited-time offers from our professionals</p>
             </div>
             <div className="flex gap-2">
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: -3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              </motion.button>
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: 3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
@@ -464,12 +364,20 @@ export default function Home() {
               <p className="text-lg text-muted-foreground">Join from the comfort of your home</p>
             </div>
             <div className="flex gap-2">
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: -3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              </motion.button>
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: 3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
@@ -490,12 +398,20 @@ export default function Home() {
               </p>
             </div>
             <div className="flex gap-2">
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: -3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button className="p-2 border border-border rounded-full hover:bg-secondary transition-colors">
+              </motion.button>
+              <motion.button
+                className="p-2 border border-border rounded-full bg-white shadow-md"
+                whileHover={{ scale: 1.1, x: 3 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">

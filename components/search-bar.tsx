@@ -1,9 +1,17 @@
+"use client"
+
 import { Search, MapPin, Calendar, Sparkles } from "lucide-react"
+import { motion } from "framer-motion"
 
 export function SearchBar() {
   return (
-    <div className="bg-background border-b border-border py-6">
-      <div className="max-w-4xl mx-auto px-6">
+    <div className="bg-background border-b border-border py-6 w-full">
+      <motion.div
+        className="max-w-4xl mx-auto px-4 sm:px-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <div className="flex items-center bg-white border border-border rounded-xl shadow-lg hover:shadow-xl transition-shadow">
           <button className="flex-1 text-left px-8 py-4 hover:bg-emerald-50 transition-colors group">
             <div className="flex items-center gap-2 mb-1">
@@ -33,11 +41,15 @@ export function SearchBar() {
             <div className="text-sm text-muted-foreground">Add service</div>
           </button>
 
-          <button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg p-4 m-2 transition-colors">
+          <motion.button
+            className="bg-gradient-to-r from-primary to-emerald-500 hover:from-primary/90 hover:to-emerald-500/90 text-white rounded-lg p-4 m-2 shadow-md"
+            whileHover={{ scale: 1.05, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Search className="w-5 h-5" />
-          </button>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
